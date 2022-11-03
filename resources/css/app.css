@@ -1,0 +1,9 @@
+a{
+    height: auto;
+    padding: 5px 5px 5px 5px;
+    color: white;
+}
+
+a:hover{
+    color:white;
+}
