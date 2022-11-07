@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/create-post', function () {
+    return view('create');
+});
+
 
 Auth::routes();
 
