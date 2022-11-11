@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,18 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/create-post', function () {
     return view('create');
-});
+})->middleware('auth');;
+
+Route::get('/settings', function (){
+    return view('settings');
+})->middleware('auth');
+
+Route::post('/update/user', [UserController::class, 'update'])->middleware('auth');
+Route::post('/delete/user', [UserController::class, 'destroy'])->middleware('auth');
 
 
 Auth::routes();
