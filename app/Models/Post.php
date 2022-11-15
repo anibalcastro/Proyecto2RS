@@ -13,10 +13,12 @@ class Post extends Model
         'idUser', 
         'title', 
         'comment', 
-        'idTypePublish', 
+        'thumbnail',
+        'type_publish_id', 
         'Facebook', 
         'Instagram', 
         'Twitter', 
         'date',
+        'published_at'
     ];
 }

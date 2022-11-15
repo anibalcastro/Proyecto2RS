@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('type_publish', function (Blueprint $table) {
             $table->id();
-            $table->string('idUser');
-            $table->string('title');
-            $table->string('comment');
-            $table->integer('idTypePublish');
-            $table->boolean('Faceebok');
-            $table->boolean('Instagram');
-            $table->boolean('Twitter');
-            $table->date('date');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('type_publish');
     }
 };

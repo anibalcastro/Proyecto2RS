@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,20 +17,16 @@ use App\Http\Controllers\UserController;
 |
 */
 
+//User views
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/create-post',[PostController::class, 'createPost'])->middleware('auth');
+Route::get('/settings', [HomeController::class, 'settings'])->middleware('auth');
 
-Route::get('/create-post', function () {
-    return view('create');
-})->middleware('auth');;
-
-Route::get('/settings', function (){
-    return view('settings');
-})->middleware('auth');
-
+//User Actions
 Route::post('/update/user', [UserController::class, 'update'])->middleware('auth');
 Route::post('/delete/user', [UserController::class, 'destroy'])->middleware('auth');
+Route::post('/create-post', [PostController::class, 'store'])->middleware('auth');
 
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
