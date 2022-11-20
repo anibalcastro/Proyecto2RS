@@ -1,3 +1,7 @@
+.container{
+    width: 100%;
+}
+
 .gg-facebook {
     box-sizing: border-box;
     position: relative;

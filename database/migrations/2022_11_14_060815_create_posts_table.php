@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('Facebook');
             $table->boolean('Instagram');
             $table->boolean('Twitter');
-            $table->date('date')->nullable();
+            $table->dateTime('date')->nullable();
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
         });
