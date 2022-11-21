@@ -130,8 +130,6 @@ class PostController extends Controller
         return redirect('/');
     }
 
-
-
     /**
      * $id -> Identificador del post que se desea eliminar
      */
