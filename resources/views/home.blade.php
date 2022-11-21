@@ -1,3 +1,7 @@
+<?php
+$socialMedia = "";
+?>
+
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -21,11 +25,11 @@
 
                             <i class="gg-twitter"></i><button class="btnTwitter btn btn-dark">Conectar</Button>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
+
             @if (is_countable($posts) && count($posts) >= 1)
             <div class="row justify-content-center pt-2">
                 <div class="col-md-8">
@@ -48,40 +52,28 @@
                                     {{$count = 1;}}
                                 @endphp
                                 @foreach($posts as $item)
-                                    @php
-                                        $socialMedia = $item->Facebook. $item->Instagram. $item->Twitter;
-                                    @endphp
                                     <tr>
                                         <th scope="row">{{$count}}</th>
                                         <td><a href="/post-information/{{$item->id}}" style="  a: link;
                                             text-decoration: none;
                                         "> {{$item->title}}</a></td>
 
-                                        @switch($socialMedia)
-                                            @case(111)
-                                                <td>Facebok / Instagram / Twitter</td>
-                                                @break
-                                            @case(110)
-                                                <td>Facebok / Instagram</td>
-                                                @break
-                                            @case(100)
-                                                <td>Facebok</td>
-                                                @break
-                                            @case(010)
-                                                <td>Instagram</td>
-                                                @break
-                                            @case(011)
-                                                <td>Instagram / Twitter</td>
-                                                @break
-                                            @case(001)
-                                                <td>Twitter</td>
-                                                @break
-                                            @case(101)
-                                                <td>Facebook / Twitter</td>
-                                                @break
-                                            @default
-                                                <td>Facebok / Instagram / Twitter</td>
-                                        @endswitch
+                                    @php
+                                        if ($item->Facebook == 1){
+                                            $socialMedia .= 'Facebook ';
+                                        }
+
+                                        if ($item->Instagram == 1){
+                                            $socialMedia .= 'Instagram ';
+                                        }
+
+                                        if ($item->Twitter == 1){
+                                            $socialMedia .= 'Twitter ';
+                                        }
+
+                                    @endphp
+
+                                       <td>{{$socialMedia}}</td>
 
 
                                         <td>
@@ -108,7 +100,8 @@
                                         </td>
                                     </tr>
                                     @php
-                                        {{$count++;}}
+                                        $count++;
+                                        $socialMedia = "";
                                     @endphp
                                 @endforeach
                                 </tbody>
@@ -119,16 +112,16 @@
                 </div>
             </div>
 
-        @else
+            @else
             <div class="row justify-content-center pt-2">
-            <div class="col-md-8" >
-                <div class="card">
-                    <div class="card-header">{{ __('Message') }}</div>
-                    <div class="card-body">
-                        {{ __('No hay publicaciones registradas...') }}
+                <div class="col-md-8" >
+                    <div class="card">
+                        <div class="card-header">{{ __('Message') }}</div>
+                        <div class="card-body">
+                            {{ __('No hay publicaciones registradas...') }}
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         @endif
     @else

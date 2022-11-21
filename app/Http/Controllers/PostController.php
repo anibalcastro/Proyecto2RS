@@ -22,6 +22,10 @@ class PostController extends Controller
         return View::make('home')->with('posts', $posts);
     }
 
+    /**
+     * $id-> Identificador de la publicacion que se muestre la informacion
+     * return -> Vista con su respectivo arreglo con la informacion.
+     */
     public function postInformation($id){
         return View::make('card-post')->with('post', Post::find($id));
     }
