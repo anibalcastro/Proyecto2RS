@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Social_Profile extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'idUser',
-        'title',
-        'comment',
-        'type_publish',
-        'date',
-        'published_at',
-        'Twitter'
+        'user_profile_id',
+        'user_access_token'
     ];
 }

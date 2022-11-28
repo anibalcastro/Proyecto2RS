@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\TwitterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 //User
 Route::get('/settings', [HomeController::class, 'settings'])->middleware('auth');
+Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
 
 //Posts
 Route::get('/', [PostController::class, 'index']);
@@ -28,6 +31,8 @@ Route::get('/edit-post/{id}', [PostController::class, 'updateView'])->middleware
 Route::post('/edit-post/{id}', [PostController::class, 'update'])->middleware('auth');
 Route::get('/delete-post/{id}',[PostController::class, 'delete'])->middleware('auth');
 Route::get('/post-information/{id}', [PostController::class, 'postInformation'])->middleware('auth');
+
+Route::get('twitter_callback.php', [TwitterController::class, 'getUserToken']);
 
 
 //User Actions

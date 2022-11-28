@@ -69,53 +69,34 @@
                 </div>
 
                 <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img src="{{asset('storage/' . $post->thumbnail)}}" alt="Imagen" height="50%" width="50%">
 
-                        </div>
-                        <hr />
+                    <div class="">
+                        <h4>Comment:</h4>
+                        <p>{{ $post->comment }}</p>
+                    </div>
 
-                        <div class="">
-                            <h4>Comment:</h4>
-                            <p>{{ $post->comment }}</p>
-                        </div>
+                    <hr />
 
-                        <hr />
+                    <div>
+                        <h4>Social Media:</h4>
+                        <ul class="tags">
+                            <li>
+                                <p class="tag">Twitter</p>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <div>
-                            <h4>Social Media:</h4>
-                            <ul class="tags">
-                                @if ($post->Facebook == 1)
-                                    <li>
-                                        <p class="tag">Facebook</p>
-                                    </li>
-                                @endif
+                    <hr />
 
-                                @if ($post->Instagram == 1)
-                                    <li>
-                                        <p class="tag">Instagram</p>
-                                    </li>
-                                @endif
+                    <div>
+                        <h4>Publication date:</h4>
+                        <p>{{ $post->date }}</p>
 
-                                @if ($post->Twitter == 1)
-                                    <li>
-                                        <p class="tag">Twitter</p>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
+                    </div>
 
-                        <hr />
+                    <hr />
 
-                        <div>
-                            <h4>Publication date:</h4>
-                            <p>{{$post->date }}</p>
-
-                        </div>
-
-                        <hr />
-
-                        <a href="/" class="btn btn-dark">Go back</a>
+                    <a href="/" class="btn btn-dark">Go back</a>
                 </div>
             </div>
         </div>
