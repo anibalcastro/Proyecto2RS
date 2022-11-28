@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TwitterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +43,6 @@ Route::post('/create-post', [PostController::class, 'store'])->middleware('auth'
 
 Auth::routes();
 Route::get('/home', [PostController::class, 'index'])->name('home');
+
+//2AF
+Route::post('/login.2fa/{user}',[LoginController::class, 'login2FA']);
