@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Social_Profile;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 
 class UserController extends Controller
@@ -44,5 +48,22 @@ class UserController extends Controller
             'email' => 'required'
         ]);
 
+    }
+
+    public static function validateAuthenticationTwitter(){
+        $resultDb = Social_Profile::where('user_id', Auth::user()->id)->where('social_network_name', 'Twitter')->get();
+        $validation = true;
+        if(count($resultDb) < 1) {
+            $validation = false;
+        }
+
+        return $validation;
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        session_destroy();
     }
 }

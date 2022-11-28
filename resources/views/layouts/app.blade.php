@@ -78,7 +78,7 @@
                                     <a class="dropdown-item" href="/settings">
                                         {{ __('Settings') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="/logout"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

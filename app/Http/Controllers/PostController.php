@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Http\Controllers\TwitterController as Twitter;
 
 
 use Illuminate\Http\Request;
@@ -52,22 +53,18 @@ class PostController extends Controller
      */
     public function store(Request $request){
         $date = $this->setDate($request->datePublish, $request->type);
-        $cbFacebook = $this->setSocialMedia($request->cbFacebook);
-        $cbInstagram = $this->setSocialMedia($request->cbInstagram);
-        $cbTwitter = $this->setSocialMedia($request->cbTwitter);
+        if($request->type == "Direct"){
+            $result = Twitter::twitterPost($request->comment);
+        }
 
-       DB::table('posts')->insert([
-        'user_id' => Auth::user()->id,
-        'title' => $request->title,
-        'comment'=> $request->comment,
-        'thumbnail' => request()->file('file')->store('public/thumbnails'),
-        'type_publish_id' => $request->type,
-        'Facebook' => $cbFacebook,
-        'Instagram' => $cbInstagram,
-        'Twitter' => $cbTwitter,
-        'date' => $date
-        ]);
-
+        $post = new Post();
+        $post->user_id =  Auth::user()->id;
+        $post->title = $request->title;
+        $post->comment = $request->comment;
+        $post->type_publish = $request->type;
+        $post->date = $date;
+        $post->Twitter = "Prueba" ;
+        $post->save();
 
         session()->flash('success', 'The post has been created');
         return redirect('/');
@@ -88,16 +85,6 @@ class PostController extends Controller
         }
     }
 
-    /**
-     * $socialMedia -> recibe si fue seleccionado con el numero 1,
-     * si recibe un null, se convierte en un 0
-     */
-    public function setSocialMedia($socialMedia){
-        $result = "";
-        $socialMedia != 1 ?  $result = 0 : $result =  1;
-
-        return $result;
-    }
 
     /**
      * $id -> Identificador del post
@@ -114,17 +101,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id){
         $date = $this->setDate(request('datePublish'), request('type'));
-        $cbFacebook = $this->setSocialMedia(request('cbFacebook'));
-        $cbInstagram = $this->setSocialMedia(request('cbInstagram'));
-        $cbTwitter = $this->setSocialMedia(request('cbTwitter'));
 
         Post::where('id',$id)->update([
             'comment'=> $request->comment,
             'type_publish_id' =>$request->type,
             'date'=> $date,
-            'Facebook'=> $cbFacebook,
-            'Instagram'=>$cbInstagram,
-            'Twitter'=>  $cbTwitter
         ]);
         Session::flash('success', 'The post has been update');
         return redirect('/');

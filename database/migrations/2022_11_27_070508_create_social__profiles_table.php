@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('social__profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('title');
-            $table->string('comment');
-            $table->string('type_publish');
-            $table->string('twitter');
-            $table->dateTime('date')->nullable();
+            $table->string('user_profile_id')->unique(); //OAuth_Token
+            $table->longText('user_access_token')->unique(); //OAuth_Secret
+            $table->string('social_network_name');
             $table->timestamps();
-            $table->timestamp('published_at')->nullable();
         });
     }
 
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('social__profiles');
     }
 };
