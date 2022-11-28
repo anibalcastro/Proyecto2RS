@@ -65,20 +65,20 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h4><strong>Post Information</strong> </h4>
+                    <strong>Post Information</strong>
                 </div>
 
                 <div class="card-body">
 
                     <div class="">
-                        <h4>Comment:</h4>
+                        <strong>Comment:</strong>
                         <p>{{ $post->comment }}</p>
                     </div>
 
                     <hr />
 
                     <div>
-                        <h4>Social Media:</h4>
+                        <strong>Social Media:</strong>
                         <ul class="tags">
                             <li>
                                 <p class="tag">Twitter</p>
@@ -89,7 +89,7 @@
                     <hr />
 
                     <div>
-                        <h4>Publication date:</h4>
+                        <strong>Publication date:</strong>
                         <p>{{ $post->date }}</p>
 
                     </div>

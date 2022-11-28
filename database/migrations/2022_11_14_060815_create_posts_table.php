@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('comment');
             $table->string('type_publish');
             $table->string('twitter');
+            $table->string('status');
             $table->dateTime('date')->nullable();
             $table->timestamps();
             $table->timestamp('published_at')->nullable();

@@ -15,14 +15,14 @@
                 <div class="col-lg-8">
                   <div class="form-group">
                     <label for="code_verification" class="col-form-label">
-                      {{ __('CÓDIGO DE VERIFICACIÓN') }}
+                      {{ __('Verification code...') }}
                     </label>
-                    <input 
-                      id="code_verification" 
-                      type="text" 
-                      class="form-control{{ $errors->has('code_verification') ? ' is-invalid' : '' }}" 
+                    <input
+                      id="code_verification"
+                      type="text"
+                      class="form-control{{ $errors->has('code_verification') ? ' is-invalid' : '' }}"
                       name="code_verification"
-                      value="{{ old('code_verification') }}" 
+                      value="{{ old('code_verification') }}"
                       required
                       autofocus>
                     @if ($errors->has('code_verification'))
@@ -31,7 +31,7 @@
                       </span>
                     @endif
                   </div>
-                  <button type="submit" class="btn btn-primary mt-2">ENVIAR</button>
+                  <button type="submit" class="btn btn-primary mt-2">SUBMIT</button>
                 </div>
               </div>
             </form>

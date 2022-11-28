@@ -66,6 +66,9 @@
                                     <a class="dropdown-item" href="/create-post">
                                         {{ __('Create new post') }}
                                     </a>
+                                    <a class="dropdown-item" href="/in-line">
+                                        {{ __('In line posts') }}
+                                    </a>
                                 </div>
                             </li>
 

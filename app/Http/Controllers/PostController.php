@@ -23,6 +23,27 @@ class PostController extends Controller
         return View::make('home')->with('posts', $posts);
     }
 
+    public function inlinePost(){
+        $posts = $this->getPostByUserId();
+        return View::make('in-line')->with('posts', $posts);
+    }
+
+    public function publishInLinePost($id){
+
+        $result = Post::find($id);
+
+        $resultTwitter = Twitter::twitterPost($result->comment);
+        $tweet_id = $resultTwitter->id;
+
+        Post::where('id',$id)->update([
+            'status'=> 'Published',
+            'twitter'=> $tweet_id
+        ]);
+
+        session()->flash('success', 'The post has been published');
+        return redirect('/');
+    }
+
     /**
      * $id-> Identificador de la publicacion que se muestre la informacion
      * return -> Vista con su respectivo arreglo con la informacion.
@@ -55,6 +76,16 @@ class PostController extends Controller
         $date = $this->setDate($request->datePublish, $request->type);
         if($request->type == "Direct"){
             $result = Twitter::twitterPost($request->comment);
+            $tweet_id = $result->id;
+            $status = "Published";
+        }
+        else if($request->type == "In-line"){
+            $status = "Pending";
+            $tweet_id = "Pending";
+        }
+        else{
+            $status = "Pending";
+            $tweet_id = "Pending";
         }
 
         $post = new Post();
@@ -63,7 +94,8 @@ class PostController extends Controller
         $post->comment = $request->comment;
         $post->type_publish = $request->type;
         $post->date = $date;
-        $post->Twitter = "Prueba" ;
+        $post->twitter = $tweet_id ;
+        $post->status = $status;
         $post->save();
 
         session()->flash('success', 'The post has been created');

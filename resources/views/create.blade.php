@@ -87,7 +87,7 @@ $date = date('d-m-Y h:i:s: a');
         let valor = document.getElementById("type").value;
         let divDate = document.getElementById('divDate');
 
-        if (valor == 3) {
+        if (valor == "Programmed") {
             divDate.style.display = 'flex';
         } else {
             divDate.style.display = 'none';

@@ -16,6 +16,7 @@ class Post extends Model
         'type_publish',
         'date',
         'published_at',
-        'Twitter'
+        'twitter',
+        'status'
     ];
 }

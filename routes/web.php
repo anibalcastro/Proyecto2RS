@@ -23,6 +23,9 @@ use App\Http\Controllers\TwitterController;
 //User
 Route::get('/settings', [HomeController::class, 'settings'])->middleware('auth');
 Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
+Route::post('/update/user', [UserController::class, 'update'])->middleware('auth');
+Route::post('/delete/user', [UserController::class, 'destroy'])->middleware('auth');
+Route::post('/create-post', [PostController::class, 'store'])->middleware('auth');
 
 //Posts
 Route::get('/', [PostController::class, 'index']);
@@ -31,14 +34,11 @@ Route::get('/edit-post/{id}', [PostController::class, 'updateView'])->middleware
 Route::post('/edit-post/{id}', [PostController::class, 'update'])->middleware('auth');
 Route::get('/delete-post/{id}',[PostController::class, 'delete'])->middleware('auth');
 Route::get('/post-information/{id}', [PostController::class, 'postInformation'])->middleware('auth');
+Route::get('/in-line', [PostController::class, 'inlinePost'])->middleware('auth');
+Route::get('/publish/inline/{id}', [PostController::class, 'publishInLinePost'])->middleware('auth');
 
+//Authenticate TW
 Route::get('twitter_callback.php', [TwitterController::class, 'getUserToken']);
-
-
-//User Actions
-Route::post('/update/user', [UserController::class, 'update'])->middleware('auth');
-Route::post('/delete/user', [UserController::class, 'destroy'])->middleware('auth');
-Route::post('/create-post', [PostController::class, 'store'])->middleware('auth');
 
 
 Auth::routes();

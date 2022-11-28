@@ -46,18 +46,18 @@ $date = date('d-m-Y h:i:s: a');
                                 <div class="col-md-6">
                                     <select class="form-control" name="type" id="type" onchange="getValueSelect()"
                                         onpageshow="getValueSelect();" required>
-                                        @if ($post['type_publish_id'] == 1)
-                                            <option selected value="1">Direct</option>
-                                            <option value="2">In line</option>
-                                            <option value="3">Programmed</option>
-                                        @elseif ($post['type_publish_id'] == 2)
-                                            <option value="1">Direct</option>
-                                            <option selected value="2">In line</option>
-                                            <option value="3">Programmed</option>
+                                        @if ($post['type_publish_id'] == 'Direct')
+                                            <option selected value="Direct">Direct</option>
+                                            <option value="In-line">In line</option>
+                                            <option value="Programmed">Programmed</option>
+                                        @elseif ($post['type_publish_id'] == "In-line")
+                                            <option value="Direct">Direct</option>
+                                            <option selected value="In-line">In line</option>
+                                            <option value="Programmed">Programmed</option>
                                         @else
-                                            <option value="1">Direct</option>
-                                            <option value="2">In line</option>
-                                            <option selected value="3">Programmed</option>
+                                            <option value="Direct">Direct</option>
+                                            <option value="In-line">In line</option>
+                                            <option selected value="Programmed">Programmed</option>
                                         @endif
                                     </select>
                                 </div>
@@ -72,58 +72,6 @@ $date = date('d-m-Y h:i:s: a');
                                         max="2040-06-14T00:00" value="{{ $post['date'] }}">
                                 </div>
                             </div>
-
-                            <!--Social Media-->
-                            <div class="row mb-3">
-                                <label for="socialmedia"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Social Media:') }}</label>
-                                <div class="col-md-6">
-                                    @if ($post['Facebook'] == 1)
-                                        <input name="cbFacebook" class="form-check-input" type="checkbox" value="1"
-                                            id="flexCheckIndeterminate" checked>
-                                    @else
-                                        <input name="cbFacebook" class="form-check-input" type="checkbox" value="1"
-                                            id="flexCheckIndeterminate">
-                                    @endif
-                                    <label class="form-check-label" for="flexCheckIndeterminate">
-                                        Facebook
-                                    </label>
-                                </div>
-
-                                <div class="row mb-0">
-                                    <label for="socialmedia" class="col-md-4 col-form-label text-md-end"></label>
-                                    <div class="col-md-6" style="margin-left:7px">
-                                        @if ($post['Instagram'] == 1)
-                                            <input name="cbInstagram" class="form-check-input" type="checkbox"
-                                                value="1" id="flexCheckIndeterminate" checked>
-                                        @else
-                                            <input name="cbInstagram" class="form-check-input" type="checkbox"
-                                                value="1" id="flexCheckIndeterminate">
-                                        @endif
-                                        <label class="form-check-label" for="flexCheckIndeterminate">
-                                            Instagram
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="socialmedia" class="col-md-4 col-form-label text-md-end"></label>
-                                <div class="col-md-6">
-                                    @if ($post['Twitter'] == 1)
-                                        <input name="cbTwitter" class="form-check-input" type="checkbox" value="1"
-                                            id="flexCheckIndeterminate" checked>
-                                    @else
-                                        <input name="cbTwitter" class="form-check-input" type="checkbox" value="1"
-                                            id="flexCheckIndeterminate">
-                                    @endif
-
-                                    <label class="form-check-label" for="flexCheckIndeterminate">
-                                        Twitter
-                                    </label>
-                                </div>
-                            </div>
-
-
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-6 offset-md-4">

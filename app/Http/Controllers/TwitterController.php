@@ -12,7 +12,7 @@ class TwitterController extends Controller
 {
 
     public static function twitterAuthenticate(){
-
+        try {
             require_once '../vendor/autoload.php';
             $config = require_once '../config.php';
 
@@ -46,19 +46,20 @@ class TwitterController extends Controller
 
             // and redirect
             return $url;
-
-            session()->flash('success','Error, Authentication failed');
+        } catch (Exception $e) {
+            session()->flash('success','Error, Authentication failed'. $e);
             return redirect('/home');
-
+        }
     }
 
     public function getUserToken(){
-
+        try {
             $contents = Storage::disk('local')->get('Auth.txt');
             $auth = explode(",", $contents);
             $oauth_token = $auth[0];
             $oauth_token_secret = $auth[1];
             Storage::delete('Auth.txt');
+            $user_id = Auth::user()->id;
 
             $config = require_once '../config.php';
             $oauth_verifier = filter_input(INPUT_GET, 'oauth_verifier');
@@ -88,7 +89,7 @@ class TwitterController extends Controller
 
             // save data in database...
             $social_profile = new Social_Profile();
-            $social_profile->user_id = Auth::user()->id;
+            $social_profile->user_id =  $user_id;
             $social_profile->user_profile_id = $token['oauth_token'];
             $social_profile->user_access_token = $token['oauth_token_secret'];
             $social_profile->social_network_name = 'twitter';
@@ -97,37 +98,39 @@ class TwitterController extends Controller
 
             session()->flash('success','The account has been linked');
             return redirect('/home');
-
-
-
-            session()->flash('success','Error, Authentication failed');
+        } catch (Exception $e) {
+            session()->flash('success','Error, Authentication failed'. $e);
             return redirect('/home');
-
-
+        }
 
     }
 
 
     public static function twitterPost($content){
 
-        require_once '../vendor/autoload.php';
-        //Implements Config
-        $config = require_once '../config.php';
+        try {
+            require_once '../vendor/autoload.php';
+            //Implements Config
+            $config = require_once '../config.php';
 
-        //get data
-        $resultDb = Social_Profile::where('user_id', Auth::user()->id)->where('social_network_name', 'twitter')->first();
-
-
-        $twitter = new TwitterOAuth(
-            $config['consumer_key'],
-            $config['consumer_secret'],
-            $resultDb->user_profile_id,
-            $resultDb->user_access_token
-        );
-        $twitter->setTimeouts(10, 15);
-        $result = $twitter->post('statuses/update', ['status'=>$content]);
+            //get data
+            $resultDb = Social_Profile::where('user_id', Auth::user()->id)->where('social_network_name', 'twitter')->first();
 
 
-        return $result;
+            $twitter = new TwitterOAuth(
+                $config['consumer_key'],
+                $config['consumer_secret'],
+                $resultDb->user_profile_id,
+                $resultDb->user_access_token
+            );
+            $twitter->setTimeouts(10, 15);
+            $result = $twitter->post('statuses/update', ['status'=>$content]);
+
+
+            return $result;
+        } catch (Exception $e) {
+            session()->flash('success','Error, Authentication failed'. $e);
+            return redirect('/home');
+        }
     }
 }
